@@ -76,26 +76,58 @@
 <section id="chat">
   <h2>Converse com Amanda</h2>
 
-  <div style="max-width: 600px; margin: 0 auto;">
-    <div style="background: #e0ffe0; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
-      <strong>Amanda:</strong> Olá! 👋 Eu sou a Amanda, sua corretora digital aqui na Imobi.Ai.
-    </div>
+  <div id="chatbox" style="max-width: 600px; margin: 0 auto; position: relative;"></div>
 
-    <div style="background: #e0ffe0; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
-      Estou aqui 24 horas por dia pra te ajudar a encontrar o imóvel ideal em qualquer lugar do Brasil!
-    </div>
-
-    <div style="background: #e0ffe0; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
-      Me diga o que você procura: uma casa pra morar? Um apartamento pra alugar? Um cantinho só seu?
-    </div>
-
-    <div style="background: #e0ffe0; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
-      Pode contar comigo pra facilitar sua busca e conectar você com as melhores oportunidades. Vamos começar?
-    </div>
-
-    <a class="botao" href="#cadastro">Quero ver imóveis</a>
+  <!-- Digitando... -->
+  <div id="digitando" style="display: none; font-style: italic; color: #555; margin: 10px 0;">
+    Amanda está digitando<span class="pontos">...</span>
   </div>
-</section>
+
+  <a class="botao" href="#cadastro">Quero ver imóveis</a>
+
+  <script>
+    const mensagens = [
+      "Olá! 👋 Eu sou a Amanda, sua corretora digital aqui na Imobi.Ai.",
+      "Estou aqui 24 horas por dia pra te ajudar a encontrar o imóvel ideal em qualquer lugar do Brasil!",
+      "Me diga o que você procura: uma casa pra morar? Um apartamento pra alugar? Um cantinho só seu?",
+      "Pode contar comigo pra facilitar sua busca e conectar você com as melhores oportunidades. Vamos começar?"
+    ];
+
+    const chatbox = document.getElementById("chatbox");
+    const digitando = document.getElementById("digitando");
+
+    function mostrarMensagem(texto) {
+      const div = document.createElement("div");
+      div.style.background = "#e0ffe0";
+      div.style.borderRadius = "10px";
+      div.style.padding = "15px";
+      div.style.marginBottom = "10px";
+      div.innerHTML = `<strong>Amanda:</strong> ${texto}`;
+      chatbox.appendChild(div);
+    }
+
+    function simularDigitacao(i = 0) {
+      if (i < mensagens.length) {
+        digitando.style.display = "block"; // Mostra "digitando..."
+        setTimeout(() => {
+          digitando.style.display = "none"; // Esconde depois de um tempo
+          mostrarMensagem(mensagens[i]);
+          simularDigitacao(i + 1);
+        }, 1800); // Tempo de digitação por frase
+      }
+    }
+
+    // Animação dos "..."
+    setInterval(() => {
+      const pontos = document.querySelector(".pontos");
+      if (pontos) {
+        if (pontos.textContent.length >= 3) {
+          pontos.textContent = ".";
+        } else {
+          pontos.textContent += ".";
+        }
+      }
+
 
 
 

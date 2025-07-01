@@ -78,9 +78,9 @@
 
   <div id="chatbox" style="max-width: 600px; margin: 0 auto; position: relative;"></div>
 
-  <!-- Digitando... -->
-  <div id="digitando" style="display: none; font-style: italic; color: #555; margin: 10px 0;">
-    Amanda está digitando<span class="pontos">...</span>
+  <!-- "Amanda está digitando..." -->
+  <div id="digitando" style="display: none; font-style: italic; color: #555; margin: 10px 0; max-width: 600px; margin: 0 auto;">
+    Amanda está digitando<span class="pontos">.</span>
   </div>
 
   <a class="botao" href="#cadastro">Quero ver imóveis</a>
@@ -108,25 +108,27 @@
 
     function simularDigitacao(i = 0) {
       if (i < mensagens.length) {
-        digitando.style.display = "block"; // Mostra "digitando..."
+        digitando.style.display = "block";
         setTimeout(() => {
-          digitando.style.display = "none"; // Esconde depois de um tempo
+          digitando.style.display = "none";
           mostrarMensagem(mensagens[i]);
           simularDigitacao(i + 1);
-        }, 1800); // Tempo de digitação por frase
+        }, 1800);
       }
     }
 
-    // Animação dos "..."
+    // Animação dos pontinhos ...
     setInterval(() => {
       const pontos = document.querySelector(".pontos");
       if (pontos) {
-        if (pontos.textContent.length >= 3) {
-          pontos.textContent = ".";
-        } else {
-          pontos.textContent += ".";
-        }
+        pontos.textContent = pontos.textContent.length >= 3 ? "." : pontos.textContent + ".";
       }
+    }, 500);
+
+    window.addEventListener("DOMContentLoaded", simularDigitacao);
+  </script>
+</section>
+
 
 
 

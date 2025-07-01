@@ -96,15 +96,32 @@
     const chatbox = document.getElementById("chatbox");
     const digitando = document.getElementById("digitando");
 
-    function mostrarMensagem(texto) {
-      const div = document.createElement("div");
-      div.style.background = "#e0ffe0";
-      div.style.borderRadius = "10px";
-      div.style.padding = "15px";
-      div.style.marginBottom = "10px";
-      div.innerHTML = `<strong>Amanda:</strong> ${texto}`;
-      chatbox.appendChild(div);
-    }
+ function mostrarMensagem(texto) {
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.alignItems = "flex-start";
+  container.style.gap = "10px";
+  container.style.marginBottom = "15px";
+
+  const avatar = document.createElement("img");
+  avatar.src = "https://i.imgur.com/n9XzY2Z.png"; // Link da imagem
+  avatar.alt = "Amanda";
+  avatar.style.width = "40px";
+  avatar.style.height = "40px";
+  avatar.style.borderRadius = "50%";
+
+  const bubble = document.createElement("div");
+  bubble.style.background = "#e0ffe0";
+  bubble.style.borderRadius = "10px";
+  bubble.style.padding = "15px";
+  bubble.style.flex = "1";
+  bubble.innerHTML = `<strong>Amanda:</strong> ${texto}`;
+
+  container.appendChild(avatar);
+  container.appendChild(bubble);
+  chatbox.appendChild(container);
+}
+
 
     function simularDigitacao(i = 0) {
       if (i < mensagens.length) {
